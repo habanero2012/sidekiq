@@ -1,0 +1,15 @@
+version: '3'
+services:
+  sidekiq:
+    build: .
+    volumes:
+      - .:/app_home
+    environment:
+      - REDIS_URL=redis://redis:6379
+    tty: true
+    depends_on:
+      - redis
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
